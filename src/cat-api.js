@@ -17,6 +17,7 @@ export function fetchBreeds() {
       throw error;
     });
 }
+
 export function fetchCatByBreed(breedId) {
   return axios
     .get(`${BASE_URL}images/search?breed_ids=${breedId}`)
