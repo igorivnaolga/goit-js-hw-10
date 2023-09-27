@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
+import SlimSelect from 'slim-select';
 import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
-import { fetchBreeds, fetchCatByBreed } from './cat-api';
 
 const selectPlaceholder = `<option class="js-selectOption js-placeholder-select" value="choose">Select the cat</option>`;
 
@@ -29,7 +29,11 @@ fetchBreeds()
     select.insertAdjacentHTML('beforeend', markup(data));
     loaderMessage.hidden = true;
     select.hidden = false;
+    new SlimSelect({
+      select: '.breed-select',
+    });
   })
+
   .catch(err => console.log(err));
 
 select.addEventListener('change', onChangeSelect);
