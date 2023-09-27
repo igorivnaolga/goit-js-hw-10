@@ -8,12 +8,12 @@ const selectPlaceholder = `<option class="js-selectOption js-placeholder-select"
 
 const select = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
-const loaderMessage = document.querySelector('.loader');
+const loader = document.querySelector('.loader');
 const errorMessage = document.querySelector('.error');
 
 select.insertAdjacentHTML('afterbegin', selectPlaceholder);
 
-loaderMessage.hidden = false;
+loader.hidden = false;
 select.hidden = true;
 errorMessage.style.display = 'none';
 
@@ -28,7 +28,7 @@ function markup(arr) {
 fetchBreeds()
   .then(data => {
     select.insertAdjacentHTML('beforeend', markup(data));
-    loaderMessage.hidden = true;
+    loader.hidden = true;
     select.hidden = false;
     new SlimSelect({
       select: '.breed-select',
@@ -42,7 +42,7 @@ select.addEventListener('change', onChangeSelect);
 function onChangeSelect() {
   catInfo.classList.add('cat-card');
   errorMessage.hidden = true;
-  loaderMessage.hidden = false;
+  loader.hidden = false;
   select.hidden = true;
 
   fetchCatByBreed(select.value)
@@ -53,7 +53,7 @@ function onChangeSelect() {
       const temperament = data[0].breeds[0].temperament;
 
       catInfo.innerHTML = createCatCard(img, name, description, temperament);
-      loaderMessage.hidden = true;
+      loader.hidden = true;
       select.hidden = false;
       catInfo.classList.remove('cat-card');
     })
@@ -62,7 +62,7 @@ function onChangeSelect() {
         'Oops! Something went wrong! Try reloading the page or select another cat breed!'
       );
 
-      loaderMessage.hidden = true;
+      loader.hidden = true;
       select.hidden = false;
       console.log(err);
       catInfo.classList.add('cat-card');
